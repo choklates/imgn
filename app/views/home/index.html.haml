@@ -1,0 +1,24 @@
+.box.hello
+  .box
+    %h1 Chantel's Button Machine
+  .container
+    .box
+      %input{:type => "text", :name => "button_text", :class => "input-text js-text", :placeholder => "Type here, bro"}
+
+.box.big
+  .container
+    .box.highlight
+      %p 
+        %strong HTML
+        (I'm just for show)
+      %button.button.js-button I am a butt
+
+.box
+  .container
+    .box.highlight
+      %p 
+        %strong PNG
+        (Click image to download)
+      %a.js-dl{:href => "#"}
+        .js-image
+          %p Nothing to see here yet
