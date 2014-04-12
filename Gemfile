@@ -47,3 +47,6 @@ group :development do
   # gem 'rack-livereload'
 end
 
+group :production, :staging do
+  gem 'rails_12factor'
+end
