@@ -3,14 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
   $('input.js-text').on 'keyup', ->
-    $('button.js-button').text($(@).val())
+    inputText = $(@).val()
+    $('button.js-button').text(inputText)
     html2canvas $('.js-button'),
       onrendered: (canvas) ->
         $image = $('<img>', src: convertCanvasToImage(canvas))
         $('.js-image').empty().append($image)
         $('.js-dl').attr
           href: $('.js-image img').attr('src')
-          download: 'button.png'
+          download: 'button-' + inputText.replace(/\s+/g, '-').toLowerCase() + '.png'
 
 convertCanvasToImage = (canvas) ->
   image = new Image()
