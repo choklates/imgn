@@ -1,9 +1,9 @@
 .box.hello
   .box
-    %h1 Chantel's Button Machine
+    %h1= @title
   .container
     .box
-      %input{:type => "text", :name => "button_text", :class => "input-text js-text", :placeholder => "Type here, bro"}
+      %input.input-text.js-text{:type => "text", :name => "button_text", :placeholder => "Type here, bro"}
 
 .box.big
   .container

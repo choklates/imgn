@@ -1,0 +1,22 @@
+.box.hello
+  .box
+    %h1= @title
+
+.box.big
+  .container
+    .box.meme.js-meme
+      .meme-canvas.js-meme-canvas
+        = image_tag 'meme-not_sure_if.jpg', :class => 'fit'
+        .caption.caption-1
+          %h1.js-caption-1
+        .caption.caption-2
+          %h1.js-caption-2
+      %input.input-text.meme-text.js-meme-text{:type => "text", "data-target" => 1, :placeholder => "Not sure if"}
+      %input.input-text.meme-text.js-meme-text{:type => "text", "data-target" => 2, :placeholder => "Something something"}
+
+.box
+  .container
+    .box.highlight
+      %a.js-dl{:href => "#"}
+        .js-image
+          %p Nothing to see here yet

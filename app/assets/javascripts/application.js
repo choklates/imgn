@@ -15,3 +15,5 @@
 //= require turbolinks
 //= require_tree .
 //= require html2canvas
+//= require jquery-ui-1.10.4.custom
+//= require jquery.fittext
