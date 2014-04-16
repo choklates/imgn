@@ -2,34 +2,46 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-  $('input.js-text').on 'keyup', ->
+
+  # button generator
+  $input = $('input.js-text')
+  $button = $('button.js-button')
+  $newImg = $('<img>')
+  $image = $('div.js-image')
+  $downloadLink = $('a.js-dl')
+
+  $input.on 'keyup', ->
     inputText = $(@).val()
-    $('button.js-button').text(inputText)
-    html2canvas $('.js-button'),
+    $button.text(inputText)
+    html2canvas $button,
       onrendered: (canvas) ->
-        $image = $('<img>', src: convertCanvasToPNG(canvas))
-        $('.js-image').empty().append($image)
-        $('.js-dl').attr
-          href: $('.js-image img').attr('src')
-          download: 'button-' + inputText.replace(/\s+/g, '-').toLowerCase() + '.png'
+        handleCanvas(canvas, inputText)
 
-  $('div.meme')
-    .on 'keyup', 'input.js-meme-text', ->
-      $this = $(@)
-      inputText = $(@).val()
-      $('h1.js-caption-' + $this.data('target')).text(inputText)
-      html2canvas $('.js-meme-canvas'),
-        onrendered: (canvas) ->
-          $image = $('<img>', src: convertCanvasToJPG(canvas))
-          $('.js-image').empty().append($image)
-      $('.js-dl').attr
-        href: $('.js-dl img').attr('src')
-        download: 'button-' + inputText.replace(/\s+/g, '-').toLowerCase() + '.jpg'
+  # meme generator
+  $meme = $('div.meme')
+  $memeCanvas = $('div.js-meme-canvas')
 
-convertCanvasToPNG = (canvas) ->
+  $meme.on 'keyup', 'input.js-meme-text', ->
+    $this = $(@)
+    inputText = $this.val()
+    $('h1.js-caption-' + $this.data('target')).text(inputText)
+    html2canvas $memeCanvas,
+      onrendered: (canvas) ->
+        handleCanvas(canvas, inputText, 'jpg')
+
+  handleCanvas = (canvas, inputText, type) ->
+    inputText = inputText or 'derp'
+    type = type or 'png'
+    $newImg.attr('src', convertCanvasToImage(canvas), type)
+    $image.empty().append($newImg)
+    $downloadLink.attr
+      href: $image.find('img').attr('src')
+      download: inputText.replace(/\s+/g, '-').toLowerCase() + '.' + type
+
+convertCanvasToImage = (canvas, type) ->
   image = new Image()
-  image.src = canvas.toDataURL("image/png")
-
-convertCanvasToJPG = (canvas) ->
-  image = new Image()
-  image.src = canvas.toDataURL("image/jpg", "1.0")
+  type = type or 'png'
+  if type is 'jpg'
+    image.src = canvas.toDataURL("image/jpg", "1.0")
+  else
+    image.src = canvas.toDataURL("image/png")
