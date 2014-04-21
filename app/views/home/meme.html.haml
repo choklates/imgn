@@ -1,9 +1,18 @@
 .box.hello
   .box
     %h1= @title
-
+.box
+  %ul.inline.js-swap-list
+    %li
+      = image_tag 'meme-not_sure_if.jpg', :class => 'fit'
+    %li
+      = image_tag 'meme-success_kid.jpg', :class => 'fit'
 .box.big
   .container
+    %button.js-swap 
+      %i.fa.fa-retweet Swap Image
+    %button 
+      %i.fa.fa-download Download
     .box.meme.js-meme
       .meme-canvas.js-meme-canvas
         = image_tag 'meme-not_sure_if.jpg', :class => 'fit'
