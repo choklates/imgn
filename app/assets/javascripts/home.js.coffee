@@ -20,8 +20,10 @@ $ ->
   # meme generator
   $meme = $('div.meme')
   $memeCanvas = $('div.js-meme-canvas')
+  $memeCaption = $('.caption').find('h1')
+  $memeInput = $('input.js-meme-text')
   $swapButton = $('button.js-swap')
-  $swapList = $('ul.js-swap-list')
+  $swapList = $('.sneaky')
 
   $meme.on 'keyup', 'input.js-meme-text', ->
     $this = $(@)
@@ -32,10 +34,14 @@ $ ->
         handleCanvas(canvas, inputText, 'jpg')
 
   $swapButton.on 'click', ->
-    $swapList.toggle()
+    $swapList.slideToggle()
 
   $swapList.on 'click', 'img', ->
+    $swapList.slideToggle()
     $memeCanvas.find('img').attr('src', this.src)
+    $image.empty()
+    $memeInput.val('')
+    $memeCaption.text('')
 
   handleCanvas = (canvas, inputText, type) ->
     inputText = inputText or 'derp'

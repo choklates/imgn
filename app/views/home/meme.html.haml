@@ -1,18 +1,23 @@
 .box.hello
   .box
     %h1= @title
-.box
+.box.sneaky
   %ul.inline.js-swap-list
-    %li
-      = image_tag 'meme-not_sure_if.jpg', :class => 'fit'
-    %li
-      = image_tag 'meme-success_kid.jpg', :class => 'fit'
+    - @images.each do |image_src|
+      %li
+        = image_tag image_src, :class => 'fit' 
 .box.big
   .container
-    %button.js-swap 
-      %i.fa.fa-retweet Swap Image
-    %button 
-      %i.fa.fa-download Download
+    .buttons
+      %button.meme-button.js-swap
+        %i.fa.fa-retweet
+        Swap Image
+      %button.meme-button
+        %i.fa.fa-download
+        Download
+      %button.meme-button
+        %i.fa.fa-comments
+        Send to HipChat
     .box.meme.js-meme
       .meme-canvas.js-meme-canvas
         = image_tag 'meme-not_sure_if.jpg', :class => 'fit'
